@@ -13,11 +13,40 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getSeason(date) {
 
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+  if (date == undefined) {
+    let warning = 'Unable to determine the time of year!';
+    return warning;
+  }
 
-  /* if (!date) {
-    return 'Unable to detrmine the time of year!';
+  // * ---- throw Error block ----
+  if (!(date instanceof Date)) {
+    throw new Error('Invalid date!');
+  }
+
+  if (date.hasOwnProperty('toString')) {
+    throw new Error('Invalid date!');
+  }
+
+  // * ---- determine season block ----
+  let season = ['spring', 'summer', 'autumn', 'winter'];
+
+  for (let i = 0; i < season.length; i++) {
+    if (date.getMonth() >= 2 && date.getMonth() < 5) {
+      return season[i];
+    }
+    if (date.getMonth() >= 5 && date.getMonth() < 8) {
+      return season[i + 1];
+    }
+    if (date.getMonth() >= 8 && date.getMonth() < 11) {
+      return season[i + 2];
+    } else {
+      return season[i + 3];
+    }
+  }
+
+  /* if (date == undefined) {
+    let warning = 'Unable to detrmine the time of year!';
+    return warning;
   }
   if (!(date instanceof Date)) {
     throw new Error('Invalid date!');
@@ -53,6 +82,6 @@ function getSeason(date) {
   }
   return season; */
 }
-  module.exports = {
-    getSeason
-  };
+module.exports = {
+  getSeason
+};
