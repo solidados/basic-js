@@ -2,28 +2,49 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement chainMaker object according to task description
- * 
+ *
  */
 const chainMaker = {
+  chain: [],
+
+  // getLength returns the current chain length as a number;
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.chain.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  // addLink(value) adds a link containing a string representation of the value to the chain;
+  // ! If addLink is called with no arguments, it adds an empty link ('( )') to the chain
+  addLink(value = '') {
+    // value = '';
+    // value = String(value);
+    this.chain.push(`( ${value} )`);
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  // removeLink(position) removes a chain link in the specified position;
+  // ! If removeLink accepts invalid position (e.g. not a number, or a fractional number, or corresponding to a nonexistent link), it must throw an Error with message You can't remove incorrect link!
+  removeLink(position) {
+    if (this.chain[position - 1] == undefined) {
+      this.chain = [];
+      throw new Error(`You can't remove incorrect link!`);
+    } else {
+      this.chain.splice(position - 1, 1);
+      return this;
+    }
   },
+
+  // reverseChain reverses the chain;
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.chain.reverse();
+    return this;
   },
+
+  // finishChain ends the chain and returns it
+  // ! After calling the finishChain method, the existing chain must be deleted, as if an Error was thrown
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let linkNext = this.chain.join('~~');
+    this.chain = [];
+    return linkNext;
   }
 };
 
