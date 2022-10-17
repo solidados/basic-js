@@ -12,9 +12,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function deleteDigit(n) {
-  n = n.toString();
+  n = String(n);
 
-  let arr = [...n].map(function (value, i) {
+  let arr = [...n].map(function (elem, i) {
     return parseInt(n.slice(0, i) + n.slice(i + 1));
   });
 
