@@ -26,8 +26,8 @@ class VigenereCipheringMachine {
   }
 
   encrypt(message, key) {
-    if (message === undefined || key === undefined) {
-      throw new Error("Message and Key are required");
+    if (!message || !key) {
+      throw new Error("Incorrect arguments!");
     }
 
     message = message.toUpperCase();
@@ -57,8 +57,8 @@ class VigenereCipheringMachine {
   }
 
   decrypt(message, key) {
-    if (message === undefined || key === undefined) {
-      throw new Error("Message and Key are required");
+    if (!message || !key) {
+      throw new Error("Incorrect arguments!");
     }
 
     message = message.toUpperCase();
